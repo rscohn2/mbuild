@@ -623,11 +623,6 @@ class work_queue_t(object):
       elapsed = get_elapsed_time(self.start_time, self.end_time)
       return elapsed
       
-   def __del__(self):
-      if verbose(3):
-         msgb("DEL WORK QUEUE")
-      # self._terminate()
-      
    def terminate(self):
       if verbose(3):
          msgb("SHUTTIN DOWN AND GOIN HOME")
