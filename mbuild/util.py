@@ -427,16 +427,21 @@ def escape_special_characters(s):
 
 if check_python_version(2,5):
     import hashlib
+    hasher = hashlib.sha1
 else:
     import sha
+    hasher = sha.new
 
+def hash_list(lst):
+    m = hasher()
+    for l in lst:
+        m.update(l.encode('utf-8'))
+    return m.hexdigest()
+        
 def hash_file(fn):
     if not os.path.exists(fn):
         return None
-    if check_python_version(2,5):
-        m = hashlib.sha1()
-    else:
-        m = sha.new()
+    m = hasher()
     with open(fn,'rb') as afile:
         buf = afile.read()
         m.update(buf)
